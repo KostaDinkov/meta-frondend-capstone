@@ -6,7 +6,7 @@ header .section-content{
     gap: 2rem
 }
 header {
-    background-color: beige;
+    background-color: var(--color-highlight-light);
 }
 
 .header-logo{
