@@ -1,0 +1,44 @@
+.hero-section .section-content {
+  display: flex;
+  gap:1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  position:relative;
+}
+.image-container {
+  position: relative;
+  flex: 1 1 0;
+}
+.hero-image {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
+}
+.hero-info {
+  flex: 1 1 0;
+  padding: 1rem 0;
+}
+
+@media screen and (max-width: 460px) {
+  .hero-section .section-content {
+    display: block;
+  }
+  .image-container{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: rgba(0,0,0,1);
+    
+  }
+  .hero-image{
+    
+    opacity: 50%;
+  }
+  .hero-info{
+    color:white;
+  }
+}

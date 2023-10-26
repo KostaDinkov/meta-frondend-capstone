@@ -1,9 +1,12 @@
 import React from "react";
+import styles from "./Nav.module.css";
 
-export default function Nav() {
+export default function Nav({ position }) {
+  const menuStyle =
+    position === "footer" ? styles.positionFooter : styles.positionHeader;
   return (
-    <nav>
-      <menu>
+    <nav >
+      <menu className={menuStyle}>
         <li>
           <a href="#">Home</a>
         </li>

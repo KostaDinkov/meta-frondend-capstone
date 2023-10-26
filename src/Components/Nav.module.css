@@ -1,0 +1,13 @@
+.positionHeader{
+    display: flex;
+    justify-content: space-between;
+    flex: 1 1 0;
+    gap:1rem;
+}
+
+.positionFooter{
+    display:flex;
+    flex-direction: column;
+}
+
+

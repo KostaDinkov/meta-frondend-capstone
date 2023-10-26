@@ -1,0 +1,15 @@
+
+header .section-content{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem
+}
+header {
+    background-color: beige;
+}
+
+.header-logo{
+    max-width: 300px;
+}
+
