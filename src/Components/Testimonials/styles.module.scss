@@ -1,12 +1,17 @@
-.testimonials-section{
+@use "../../base" as base;
+
+.testimonialsSection{
     background-color: white;
 }
 
-.testimonials-cards{
+.testimonialsContent{
+    @extend .section-content;
+}
+
+.testimonialsCards{
     display:flex;
     overflow-x: scroll;
     scroll-behavior: smooth;
-    
     justify-content:flex-start;
     gap: 2rem;
 }

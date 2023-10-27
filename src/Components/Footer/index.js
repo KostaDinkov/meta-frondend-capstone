@@ -1,33 +1,33 @@
 import React from "react";
-import logo from "../Images/logo-mono-footer.png";
-import Nav from "./Nav";
-import "./Footer.css";
+import logo from "../../Images/logo-mono-footer.png";
+import Nav from "../Nav";
+import styles from "./styles.module.scss";
 
 export default function Footer() {
   return (
     <footer>
-      <div className="section-content">
-        <article className="">
-          <img src={logo} alt="" />
+      <div className={styles.footerContent}>
+        <article >
+          <img src={logo} alt="Little restaurant logo"/>
         </article>
-        <article className="">
+        <article >
           <h3>Contacts</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
             quam alias eligendi cupiditate animi quia voluptates quos doloremque
           </p>
         </article>
-        <article className="social-media">
+        <article className={styles.socialMedia}>
           <h3>Links to social media</h3>
           <ul>
             <li>
-              <a href="">Facebook</a>
+              <a href="https://www.facebook.com">Facebook</a>
             </li>
             <li>
-              <a href="">Instagram</a>
+              <a href="https://www.instagram.com">Instagram</a>
             </li>
             <li>
-              <a href="">LinkedIn</a>
+              <a href="https://www.linkedin.com">LinkedIn</a>
             </li>
           </ul>
         </article>

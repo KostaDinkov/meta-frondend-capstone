@@ -1,0 +1,49 @@
+@use "../../base" as base;
+
+.heroContent {
+  @extend .section-content;
+  display: flex;
+  gap: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  position: relative;
+}
+.imageContainer {
+  position: relative;
+  flex: 1 1 0;
+  img {
+    height: 120%;
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+    top: -10%;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+}
+
+.heroInfo {
+  flex: 1 1 0;
+  padding: 1rem 0;
+}
+
+@media screen and (max-width: 460px) {
+  .heroContent {
+    display: block;
+  }
+  .imageContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 1);
+    img {
+      opacity: 50%;
+    }
+  }
+  .heroInfo {
+    color: white;
+  }
+}

@@ -1,0 +1,41 @@
+@use "../../base" as base;
+
+footer{
+    background-color: base.$color-primary-dark;
+    color: base.$color-highlight-light;
+    h3{
+        margin-block-start: 0;
+        line-height: 100%;
+    }
+    ul, menu{
+        margin-block: 0;
+        padding-inline-start: 0;
+    }
+}
+
+.footerContent{
+    @extend .section-content;
+    padding-top:2rem;
+    display:grid;
+    grid-template-columns:auto 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.socialMedia{
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+@media screen and (max-width:830px){
+    .footerContent{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width:460px){
+    .footerContent{
+        grid-template-columns: 1fr ;
+    }
+}
+

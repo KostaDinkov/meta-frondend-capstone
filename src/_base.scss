@@ -1,0 +1,14 @@
+$max-content-width: 960px;
+$color-primary-dark: #44554f;
+$color-primary-yellow: #f4ce14;
+$color-secondary-mango: #ee9972;
+$color-secondary-peach: #fbdabb;
+$color-highlight-light: #edefee;
+$color-highlight-dark: #333333;
+$border-radius-large: 16px;
+
+.section-content {
+  margin: auto;
+  max-width: $max-content-width;
+  padding: 1rem;
+}

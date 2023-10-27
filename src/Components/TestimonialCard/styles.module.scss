@@ -1,0 +1,19 @@
+@use '../../base' as base;
+
+.card{
+    background-color: base.$color-highlight-light;
+    border-radius: base.$border-radius-large;
+    padding: 1rem;
+    max-width: 216px;
+    flex: 1 1 0;
+}
+
+.info{
+    display:flex;
+    gap: 1rem;
+}
+.image{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}

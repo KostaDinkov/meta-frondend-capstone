@@ -1,22 +1,24 @@
-.highlights-section {
+@use "../../base" as base;
+
+.highlightsSection {
     background-color: var(--color-highlight-light);
     padding-top: 2.5rem;
-
 }
 
+.highlightsContent{
+    @extend .section-content;
+}
 
-
-.highlights-section .heading-bar{
+.headingBar{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.highlights-section .highlight-cards-container{
+ .cardsContainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     gap:1rem;
-    
 }
 

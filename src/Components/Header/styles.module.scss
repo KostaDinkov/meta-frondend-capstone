@@ -1,0 +1,19 @@
+@use "../../base" as base;
+header {
+    background-color: base.$color-highlight-light;
+}
+
+.headerContent{
+    @extend .section-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem
+}
+
+
+.headerLogo{
+    max-width: 300px;
+    min-width: 200px;
+}
+

@@ -1,0 +1,15 @@
+@use '../../base';
+
+.aboutSection{
+    background-color: cadetblue;
+    
+}
+.aboutContent{
+    @extend .section-content;
+    display:flex;
+    gap:2rem;
+}
+
+.info{
+    
+}
