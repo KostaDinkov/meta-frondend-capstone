@@ -1,0 +1,22 @@
+.highlights-section {
+    background-color: var(--color-highlight-light);
+    padding-top: 2.5rem;
+
+}
+
+
+
+.highlights-section .heading-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.highlights-section .highlight-cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap:1rem;
+    
+}
+
