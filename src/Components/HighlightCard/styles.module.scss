@@ -1,14 +1,16 @@
+@use "../../base" as base;
+
 .highlightCard {
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
   background-color: white;
-  border-radius: var(--border-radius-large);
+  border-radius: base.$border-radius-large;
 
   img {
     height: 200px;
     object-fit: cover;
-    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+    border-radius: base.$border-radius-large base.$border-radius-large 0 0;
   }
 }
 

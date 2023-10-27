@@ -1,7 +1,7 @@
-@use "../../base";
+@use "../../base" as base;
 
 .aboutSection {
-  background-color: cadetblue;
+  background-color: base.$color-highlight-light;
 
   display: flex;
   flex-direction: column;

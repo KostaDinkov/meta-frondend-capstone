@@ -1,6 +1,7 @@
 @use "../../base" as base;
 header {
     background-color: base.$color-highlight-light;
+    padding-bottom: 2rem;
 }
 
 .headerContent{
@@ -8,9 +9,9 @@ header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 2rem
-}
+    justify-content: space-between;
 
+}
 
 .headerLogo{
     max-width: 300px;
