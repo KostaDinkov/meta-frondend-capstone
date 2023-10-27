@@ -1,5 +1,5 @@
 import React from 'react'
-import "./HighlightCard.scss"
+import "./styles.scss"
 
 export default function HighlightCard({data}) {
   return (

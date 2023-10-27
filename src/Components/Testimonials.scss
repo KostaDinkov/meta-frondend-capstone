@@ -1,0 +1,12 @@
+.testimonials-section{
+    background-color: white;
+}
+
+.testimonials-cards{
+    display:flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    
+    justify-content:flex-start;
+    gap: 2rem;
+}
