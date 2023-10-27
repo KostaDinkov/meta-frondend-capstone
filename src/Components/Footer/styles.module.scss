@@ -1,6 +1,7 @@
 @use "../../base" as base;
 
 footer{
+    padding-top:7%;
     background-color: base.$color-primary-dark;
     color: base.$color-highlight-light;
     h3{

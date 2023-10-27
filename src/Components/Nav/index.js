@@ -1,7 +1,9 @@
 import React from "react";
-import styles from "./styles.module.scss";
+const styles = require("./styles.module.scss");
 
 export default function Nav({ position }) {
+
+
   const menuStyle =
     position === "footer" ? styles.positionFooter : styles.positionHeader;
   return (
