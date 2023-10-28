@@ -9,6 +9,13 @@ body {
 }
 h1,h2,h3,h4{
   margin-block: 0;
+  font-family: 'Markazi Text', serif;
+}
+h1{
+  font-size: 2rem;
+}
+p, a, li,ul{
+  font-family: "Karla", sans-serif;
 }
 menu{
   margin-block: 0;
