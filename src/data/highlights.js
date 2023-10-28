@@ -10,7 +10,7 @@ export const highlightsData = [
       imageSrc: "images/tzatsiki.jpg",
       title: "Tzatziki",
       description: "Tzatziki is a refreshing and tangy Greek appetizer or condiment. This creamy dip is made from thick Greek yogurt, grated cucumbers, garlic, fresh dill or mint, and a drizzle of olive oil. Tzatziki is traditionally served with pita bread or as a condiment for gyros or grilled meats. It's known for its cool and creamy texture, balanced with the bright flavors of cucumber and herbs.",
-      price: "4.30",
+      price: "5.40",
       deliveryPrice: "2.50",
     },
     {
@@ -20,4 +20,18 @@ export const highlightsData = [
       price: "11.90",
       deliveryPrice: "2.50",
     },
+    {
+      imageSrc:"images/seafood-linguine.jpg",
+      title:"Seafood Linguine",
+      description:"Seafood linguine is a delightful Mediterranean pasta dish. It combines linguine with an array of fresh seafood such as shrimp, mussels, clams, and squid. The pasta is typically tossed in a garlic-infused white wine and tomato sauce with a hint of red pepper flakes, all garnished with fresh parsley.",
+      price: "15.90",
+      deliveryPrice:"3",
+    },
+    {
+      imageSrc:"images/bruschetta.jpg",
+      title:"Mozzarella Bruschetta",
+      description:"Bruschetta is an appetizer that showcases the vibrant flavors of the Mediterranean. Slices of toasted Italian bread are rubbed with garlic and topped with diced ripe tomatoes, fresh basil, red onion, and a generous drizzle of olive oil. It's a delightful and refreshing dish.",
+      price: "4.30",
+      deliveryPrice:"2.00",
+    }
   ];
