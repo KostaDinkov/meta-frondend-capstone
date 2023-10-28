@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./styles.module.scss";
 import HighlightCard from "../HighlightCard";
 import { highlightsData } from "../../data/highlights";
+import Button from "../Elements/Button";
 
 
 
@@ -11,7 +12,7 @@ export default function Highlights() {
       <div className={styles.highlightsContent}>
         <div className={styles.headingBar}>
           <h1>Specials</h1>
-          <button>Order Online</button>
+          <Button type='primary'>Order Online</Button>
         </div>
         <div className = {styles.cardsContainer}>
           {highlightsData.map((h) => (

@@ -1,6 +1,7 @@
 import React from "react";
 import heroImage from "../../Images/img_1.jpg";
 import styles from "./styles.module.scss";
+import Button from "../Elements/Button";
 
 export default function Hero() {
   return (
@@ -15,7 +16,7 @@ export default function Hero() {
             Voluptatum ducimus sapiente magni nulla necessitatibus hic. Corporis
             debitis porro itaque suscipit aspernatur?
           </p>
-          <button>Reserve a table</button>
+          <Button type="primary">Reserve a table</Button>
         </div>
 
         <div className={styles.imageContainer}>
