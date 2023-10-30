@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import App from "./Routes/Home";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import BookingPage from "./Routes/BookingPage";
 
 const router = createBrowserRouter([
   {
@@ -12,8 +13,8 @@ const router = createBrowserRouter([
     errorElement: <div>404 Not found</div>,
   },
   {
-    path: "/book-table",
-    element: <div>Book a table</div>,
+    path: "/booking",
+    element: <BookingPage/>,
   },
 ]);
 
