@@ -5,7 +5,7 @@ import App from "./Routes/Home";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import BookingPage from "./Routes/BookingPage";
-
+import ApiProvider from "./Context/FakeApiContext";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/booking",
-    element: <BookingPage/>,
+    element: <ApiProvider><BookingPage/></ApiProvider>,
   },
 ]);
 

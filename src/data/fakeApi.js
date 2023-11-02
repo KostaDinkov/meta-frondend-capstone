@@ -3,10 +3,18 @@ export default class FakeReservationsApi {
     "2023-11-03": [
       {
         tableId: 0,
-        reservedTimes: ["20:00", "22:00"],
+        reservedTimes: ["20:00", "21:00","22:00"],
       },
       {
         tableId: 1,
+        reservedTimes: ["17:00", "21:00"],
+      },
+      {
+        tableId: 2,
+        reservedTimes: ["17:00", "21:00"],
+      },
+      {
+        tableId: 3,
         reservedTimes: ["17:00", "21:00"],
       },
       {
@@ -54,10 +62,6 @@ export default class FakeReservationsApi {
     },
   ];
 
-  constructor(allHours, tables) {
-    this.tables = tables;
-    this.allHours = allHours;
-  }
 
   getSuitableTables(guests) {
     let suitableTables = this.tables.filter(
