@@ -60,6 +60,11 @@ export default class FakeReservationsApi {
       seats: 12,
       minGuests: 9,
     },
+    {
+        tableId: 7,
+        seats: 16,
+        minGuests: 13,
+      },
   ];
 
 
@@ -125,12 +130,22 @@ export default class FakeReservationsApi {
             continue;
         }
         else{
-            reserved= {
-                ...reserved,
-                reservedTimes:[...reserved.reservedTimes, formData.time]
-            }
+            reserved.reservedTimes = [...reserved.reservedTimes, formData.time]
+
+            
+            return {message:"success"}
         }
     }
     return {message:"fail"}
+  }
+
+  async getMaxTableSize(){
+    let maxTableSize = 0;
+    for(let table of this.tables){
+        if(table.seats>maxTableSize){
+            maxTableSize = table.seats;
+        }
+    }
+    return maxTableSize;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useReducer} from "react";
+import React, { useEffect, useReducer, useState} from "react";
 import Header from "../../Components/Header";
 import BookingForm from "../../Components/BookingForm";
 import { useFakeApi } from "../../Context/FakeApiContext";
@@ -17,15 +17,22 @@ function reducer(state, action) {
 
 export default function BookingPage() {
   const [availableTimes, dispatch] = useReducer(reducer,[]);
+  const [maxTableSize, setMaxTableSize] = useState(0);
 
   const api = useFakeApi();
-
+  useEffect(()=>{
+    (async ()=> {
+      let mts = await api.getMaxTableSize()
+      setMaxTableSize(mts);
+    })()
+  },[])
   async function updateTimes(date, guests){
     const result = await api.fetchAPI(date, guests)
     dispatch({type:"update_times", data:result})
   }
   async function submitForm(formData) {
     const result = await api.submitAPI(formData);
+    console.log(result.message)
   }
 
   return (
@@ -34,7 +41,8 @@ export default function BookingPage() {
       <BookingForm
         availableTimes={availableTimes}
         updateTimes={updateTimes}
-        onSubmitForm={submitForm}
+        submitForm={submitForm}
+        maxTableSize={maxTableSize}
       />
     </>
   );

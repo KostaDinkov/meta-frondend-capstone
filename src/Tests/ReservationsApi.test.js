@@ -176,4 +176,26 @@ describe("submitAPI", () => {
     const response = await api.submitAPI(formData);
     expect(response.message).toBe("fail");
   });
+  test("prevents double booking", async () => {
+    api.tables = tables;
+    api.reservations = {
+      [date]: [
+        { tableId: 2, reservedTimes: ["18:00", "19:00", "20:00"] },
+        { tableId: 3, reservedTimes: ["18:00", "19:00", "20:00"] },
+      ],
+    };
+
+    const formData = {
+      date: date,
+      guests: 2,
+      time: "21:00",
+      occasion: "No occasion",
+    };
+    const firstRes = await api.submitAPI(formData);
+    expect(firstRes.message).toBe("success");
+    const secondRes = await api.submitAPI(formData);
+    expect(secondRes.message).toBe("success");
+    const thirdRes = await api.submitAPI(formData);
+    expect(thirdRes.message).toBe("fail");
+  });
 });
