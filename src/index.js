@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import BookingPage from "./Routes/BookingPage";
 import ApiProvider from "./Context/FakeApiContext";
+import ConfirmedBooking from "./Routes/ConfirmedBooking";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,7 +16,12 @@ const router = createBrowserRouter([
   {
     path: "/booking",
     element: <ApiProvider><BookingPage/></ApiProvider>,
+
   },
+  {
+    path:"/confirmation",
+    element:<ConfirmedBooking/>
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

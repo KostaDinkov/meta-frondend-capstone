@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import ErrorField from "../Elements/FormErrorField";
+import { useNavigate } from "react-router-dom";
 import {
   validateDate,
   validateTime,
   validateGuests,
   validateForm,
 } from "./validators";
+import Selector from "./Selector";
 
 const defaultFormState = {
   date: {
@@ -39,13 +41,20 @@ const defaultFormState = {
 };
 export default function BookingForm({
   availableTimes,
+  resetTimes,
   updateTimes,
   submitForm,
   maxTableSize,
+  loading,
 }) {
   const [formState, setFormState] = useState(defaultFormState);
+  const navigate = useNavigate();
+  const [submissionError, setSubmissionError] = useState({
+    status: false,
+    message: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formState.isValid) {
       const formData = {
@@ -54,13 +63,20 @@ export default function BookingForm({
         guests: Number(formState.guests.value),
         occasion: formState.occasion.value,
       };
-      submitForm(formData);
-      clearForm();
-      return;
+
+      const submissionResult = await submitForm(formData);
+
+      if (submissionResult.message === "success") {
+        setSubmissionError(false);
+        resetForm();
+        navigate("/confirmation",{replace: true});
+      } else {
+        setSubmissionError({ status: true, message: submissionResult.message });
+      }
     }
   };
 
-  const clearForm = () => {
+  const resetForm = () => {
     setFormState({
       ...defaultFormState,
       guests: { ...defaultFormState.guests, maxTableSize },
@@ -75,41 +91,66 @@ export default function BookingForm({
   }, [maxTableSize]);
 
   useEffect(() => {
-    if (formState.date.isValid && formState.guests.isValid ) {
-      updateTimes(formState.date.value, Number(formState.guests.value));
+    if (!formState.date.isValid || !formState.guests.isValid) {
+      resetTimes();
     }
-
   }, [formState.date, formState.guests]);
 
-  useEffect(()=>{
-    if(formState.date.isValid && formState.time.isValid && formState.guests.isValid){
-      setFormState({...formState, isValid: true});
+  useEffect(() => {
+    if (
+      formState.date.isValid &&
+      formState.time.isValid &&
+      formState.guests.isValid
+    ) {
+      setFormState({ ...formState, isValid: true });
+    } else {
+      setFormState({ ...formState, isValid: false });
     }
-    else{
-      setFormState({...formState, isValid: false})
-    }
-  },[formState.date.isValid, formState.time.isValid, formState.guests.isValid])
- 
-  const setTouched = (field)=>{
-    setFormState({
-      ...formState,
-      [field]: { ...formState[field], isTouched: true },
-    })
-  }
-  
-  const handleFieldChange = (field, value, validatorFn, args)=>{
-    const validationResult = validatorFn(value, ...args)
+  }, [
+    formState.date.isValid,
+    formState.time.isValid,
+    formState.guests.isValid,
+  ]);
 
+  const handleFieldChange = (field, value) => {
+    const validationResult = validateField(field, value);
+    if (!validationResult) {
+      return;
+    }
     setFormState({
       ...formState,
-      [field]: { ...formState[field],
+      [field]: {
+        ...formState[field],
         value: value,
         isValid: validationResult.isValid,
-        errorMessages: validationResult.errors
-       },
-    })
-  }
+        errorMessages: validationResult.errors,
+        isTouched: true,
+      },
+    });
+  };
 
+  const validateField = (field, value) => {
+    let validationResult;
+    switch (field) {
+      case "date":
+        validationResult = validateDate(value);
+        break;
+      case "time":
+        validationResult = validateTime(value);
+        break;
+      case "guests":
+        validationResult = validateGuests(value, maxTableSize);
+        break;
+      default:
+        console.debug(`validateField: Field "${field}" has no validators`);
+    }
+    return validationResult;
+  };
+
+  const checkAvailableTimes = (e) => {
+    e.preventDefault();
+    updateTimes(formState.date.value, Number(formState.guests.value));
+  };
 
   return (
     <>
@@ -117,11 +158,16 @@ export default function BookingForm({
       <form className={styles.bookingForm} onSubmit={handleSubmit}>
         <label htmlFor="res-date">Choose date</label>
         <input
+          required
           type="date"
           id="res-date"
           value={formState.date.value}
-          onBlur={()=>{setTouched('date')} }
-          onChange={(e)=>{handleFieldChange('date', e.target.value, validateDate, [])}}
+          onBlur={(e) => {
+            handleFieldChange("date", e.target.value);
+          }}
+          onChange={(e) => {
+            handleFieldChange("date", e.target.value);
+          }}
         />
         <ErrorField
           display={formState.date.isTouched && !formState.date.isValid}
@@ -130,63 +176,74 @@ export default function BookingForm({
 
         <label htmlFor="guests">Number of guests (max: {maxTableSize})</label>
         <input
+          required
           type="number"
           placeholder="1"
           min={0}
           max={maxTableSize}
           id="guests"
           value={Number(formState.guests.value).toString()}
-          onBlur={() => setTouched("guests")}
-          onChange={(e)=>{handleFieldChange('guests',Number(e.target.value), validateGuests, [maxTableSize])}}
+          onBlur={(e) => handleFieldChange("guests", Number(e.target.value))}
+          onChange={(e) => {
+            handleFieldChange("guests", Number(e.target.value));
+          }}
         />
         <ErrorField
           display={formState.guests.isTouched && !formState.guests.isValid}
           message={formState.guests.errorMessages[0]}
         />
 
-        <label htmlFor="res-time">Choose time</label>
-        <select
-          aria-label="Time picker"
-          id="res-time "
-          value={formState.time.value}
-          onBlur={()=>setTouched('time')}
-          onChange={(e)=>handleFieldChange('time', e.target.value, validateTime,[])}
-        >
-          <option>Select time</option>
-          {availableTimes.length > 0 &&
-            availableTimes.map((t) => (
-              <option value={t} key={t}>
-                {t}
-              </option>
-            ))}
-        </select>
-        <ErrorField
-          display={formState.time.isTouched && !formState.time.isValid}
-          message={formState.time.errorMessages[0]}
+        {
+          <button
+            disabled={!(formState.date.isValid && formState.guests.isValid)}
+            onClick={checkAvailableTimes}
+          >
+            Check availability
+          </button>
+        }
+
+        {availableTimes.length > 0 &&
+          formState.date.isValid &&
+          formState.guests.isValid && (
+            <Selector
+              name="time"
+              label="Choose Time"
+              value={formState.time.value}
+              options={availableTimes}
+              defaultOption={"Select time"}
+              error={{
+                status: !formState.time.isValid,
+                message: formState.time.errorMessages[0],
+              }}
+              handleFieldChange={handleFieldChange}
+            />
+          )}
+
+        <Selector
+          name="occasion"
+          label="Occasion"
+          value={formState.occasion}
+          handleFieldChange={handleFieldChange}
+          options={["No occasion", "Birthday", "Anniversary"]}
         />
 
-        <label htmlFor="occasion">Occasion</label>
-        <select
-          id="occasion"
-          value={formState.occasion.value}
-          onChange={(e) =>
-            setFormState({
-              ...formState,
-              occasion: { ...formState.occasion, value: e.target.value },
-            })
-          }
-        >
-          <option>No occasion</option>
-          <option>Birthday</option>
-          <option>Anniversary</option>
-        </select>
-
         <input
-          disabled={!formState.isValid}
+          disabled={!formState.isValid || loading}
           type="submit"
           value="Make Your reservation"
         />
+        {loading && (
+          <div className={styles.spinnerOverlay}>
+            <div className={styles.spinner}></div>
+          </div>
+        )}
       </form>
+      {submissionError.status && (
+        <>
+          <h2>Error submitting form. Please try again! </h2>
+          <p>{submissionError.message}</p>
+        </>
+      )}
     </>
   );
 }

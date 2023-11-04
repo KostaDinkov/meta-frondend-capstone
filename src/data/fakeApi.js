@@ -76,7 +76,7 @@ export default class FakeReservationsApi {
   }
   async fetchAPI(dateString, guests) {
     //add fake network delay
-    //await new Promise((r) => setTimeout(r, 2000));
+    await new Promise((r) => setTimeout(r, 2000));
 
     let availableHours = new Set();
 
@@ -112,6 +112,12 @@ export default class FakeReservationsApi {
     return Array.from(availableHours);
   }
   async submitAPI(formData){
+    //add fake network delay
+    await new Promise((r) => setTimeout(r, 2000));
+    let randomFail = Math.round(Math.random()*100);
+    if(randomFail>50){
+      return{message:`Fake Api error. Random number was ${randomFail}. For success, random number should be below 50. Hit Submit Button again`}
+    }
     let suitableTables = this.getSuitableTables(formData.guests);
     if (!this.reservations.hasOwnProperty(formData.date)){
         this.reservations[formData.date] = [];
@@ -132,7 +138,6 @@ export default class FakeReservationsApi {
         else{
             reserved.reservedTimes = [...reserved.reservedTimes, formData.time]
 
-            
             return {message:"success"}
         }
     }
