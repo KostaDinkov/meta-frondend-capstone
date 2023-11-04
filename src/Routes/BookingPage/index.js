@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer, useState } from "react";
-import Header from "../../Components/Header";
 import BookingForm from "../../Components/BookingForm";
 import { useFakeApi } from "../../Context/FakeApiContext";
 import styles from "./styles.module.scss";

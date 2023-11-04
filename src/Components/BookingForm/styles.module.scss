@@ -1,8 +1,55 @@
+@use "../../base" as base;
+
 .bookingForm {
   position:relative;  
   display: grid;
   max-width: 250px;
   gap: 5px;
+}
+
+.successDetails{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap: 1rem;
+}
+.successLayout{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  gap:1rem;
+  flex:1 1 0;
+}
+form input, select{
+  border-radius: 8px;
+  border: 1px solid base.$color-highlight-dark;
+  padding:5px;
+}
+
+.button, .buttonMain{
+  border-radius: 8px;
+  border: 1px solid black;
+  font-size: 1rem;
+  padding:10px;
+  &:disabled{
+    background-color: base.$color-highlight-light;
+    border: none
+  }
+}
+
+.submitBtnGroup{
+  display:flex;
+  justify-content: space-between;
+}
+
+.buttonMain {
+  background-color:base.$color-primary-yellow;
+}
+
+.button{
+  background-color: base.$color-primary-dark;
+  color:base.$color-highlight-light;
+  border:none;
 }
 
 

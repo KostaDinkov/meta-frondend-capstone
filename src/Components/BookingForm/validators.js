@@ -66,6 +66,11 @@ export function validateTime(time) {
   return result;
 }
 
+export function validateOccasion(occasion){
+  return new ValidationResult();
+  
+}
+
 
 
 class ValidationResult {

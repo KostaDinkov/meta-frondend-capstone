@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import ErrorField from "../Elements/FormErrorField";
-import { useNavigate } from "react-router-dom";
 import {
   validateDate,
   validateTime,
   validateGuests,
-  validateForm,
+  validateOccasion,
 } from "./validators";
-import Selector from "./Selector";
-import Spinner from "../Elements/Spinner";
+
+import CheckAvailability from "./CheckAvailability";
+import SubmitForm from "./SubmitForm";
+import Success from "./Success";
 
 const defaultFormState = {
   date: {
@@ -29,66 +30,28 @@ const defaultFormState = {
     isValid: false,
     errorMessages: [],
     isTouched: false,
-    maxTableSize: 0,
   },
   occasion: {
     value: "no occasion",
-    isValid: true,
+    isValid: false,
     errorMessages: [],
     isTouched: false,
   },
-  // timesDisable: true,
+  isLoading: false,
   isValid: false,
+  availableTimes: [],
+  stage: 0,
+  maxTableSize: 0,
 };
-export default function BookingForm({
-  availableTimes,
-  resetTimes,
-  updateTimes,
-  submitForm,
-  maxTableSize,
-  loading,
-}) {
+export default function BookingForm({ resetTimes, submitForm, maxTableSize }) {
   const [formState, setFormState] = useState(defaultFormState);
-  const navigate = useNavigate();
   const [submissionError, setSubmissionError] = useState({
     status: false,
     message: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (formState.isValid) {
-      const formData = {
-        date: formState.date.value,
-        time: formState.time.value,
-        guests: Number(formState.guests.value),
-        occasion: formState.occasion.value,
-      };
-
-      const submissionResult = await submitForm(formData);
-
-      if (submissionResult.message === "success") {
-        setSubmissionError(false);
-        resetForm();
-        navigate("/confirmation",{replace: true});
-      } else {
-        setSubmissionError({ status: true, message: submissionResult.message });
-      }
-    }
-  };
-
-  const resetForm = () => {
-    setFormState({
-      ...defaultFormState,
-      guests: { ...defaultFormState.guests, maxTableSize },
-    });
-  };
-
   useEffect(() => {
-    setFormState({
-      ...formState,
-      guests: { ...formState.guests, maxTableSize: maxTableSize },
-    });
+    setFormState({ ...formState, maxTableSize });
   }, [maxTableSize]);
 
   useEffect(() => {
@@ -112,6 +75,36 @@ export default function BookingForm({
     formState.time.isValid,
     formState.guests.isValid,
   ]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formState.isValid) {
+      const formData = {
+        date: formState.date.value,
+        time: formState.time.value,
+        guests: Number(formState.guests.value),
+        occasion: formState.occasion.value,
+      };
+      setFormState({ ...formState, isLoading: true });
+      const submissionResult = await submitForm(formData);
+      setFormState({ ...formState, isLoading: false });
+
+      if (submissionResult.message === "success") {
+        setSubmissionError(false);
+        resetForm();
+        setFormState({ ...formState, stage: 2 });
+      } else {
+        setSubmissionError({ status: true, message: submissionResult.message });
+      }
+    }
+  };
+
+  const resetForm = () => {
+    setFormState({
+      ...defaultFormState,
+      guests: { ...defaultFormState.guests, maxTableSize },
+    });
+  };
 
   const handleFieldChange = (field, value) => {
     const validationResult = validateField(field, value);
@@ -142,101 +135,36 @@ export default function BookingForm({
       case "guests":
         validationResult = validateGuests(value, maxTableSize);
         break;
+      case "occasion":
+        validationResult = validateOccasion(value);
+        break;
       default:
         console.debug(`validateField: Field "${field}" has no validators`);
     }
     return validationResult;
   };
 
-  const checkAvailableTimes = (e) => {
-    e.preventDefault();
-    updateTimes(formState.date.value, Number(formState.guests.value));
-  };
-
+  //TODO-- handle situation where there are no avaliable times
   return (
     <>
-      <h1>Book now</h1>
-      <form className={styles.bookingForm} onSubmit={handleSubmit}>
-        <label htmlFor="res-date">Choose date</label>
-        <input
-          required
-          type="date"
-          id="res-date"
-          value={formState.date.value}
-          onBlur={(e) => {
-            handleFieldChange("date", e.target.value);
-          }}
-          onChange={(e) => {
-            handleFieldChange("date", e.target.value);
-          }}
-        />
-        <ErrorField
-          display={formState.date.isTouched && !formState.date.isValid}
-          message={formState.date.errorMessages[0]}
-        />
-
-        <label htmlFor="guests">Number of guests (max: {maxTableSize})</label>
-        <input
-          required
-          type="number"
-          placeholder="1"
-          min={0}
-          max={maxTableSize}
-          id="guests"
-          value={Number(formState.guests.value).toString()}
-          onBlur={(e) => handleFieldChange("guests", Number(e.target.value))}
-          onChange={(e) => {
-            handleFieldChange("guests", Number(e.target.value));
-          }}
-        />
-        <ErrorField
-          display={formState.guests.isTouched && !formState.guests.isValid}
-          message={formState.guests.errorMessages[0]}
-        />
-
-        {
-          <button
-            disabled={!(formState.date.isValid && formState.guests.isValid)}
-            onClick={checkAvailableTimes}
-          >
-            Check availability
-          </button>
-        }
-
-        {availableTimes.length > 0 &&
-          formState.date.isValid &&
-          formState.guests.isValid && (
-            <Selector
-              name="time"
-              label="Choose Time"
-              value={formState.time.value}
-              options={availableTimes}
-              defaultOption={"Select time"}
-              error={{
-                status: !formState.time.isValid,
-                message: formState.time.errorMessages[0],
-              }}
-              handleFieldChange={handleFieldChange}
-            />
-          )}
-
-        <Selector
-          name="occasion"
-          label="Occasion"
-          value={formState.occasion}
+      {formState.stage === 0 && (
+        <CheckAvailability
+          formState={formState}
+          setFormState={setFormState}
           handleFieldChange={handleFieldChange}
-          options={["No occasion", "Birthday", "Anniversary"]}
         />
-
-        <input
-          disabled={!formState.isValid || loading}
-          type="submit"
-          value="Make Your reservation"
+      )}
+      {formState.stage === 1 && (
+        <SubmitForm
+          formState={formState}
+          setFormState={setFormState}
+          handleFieldChange={handleFieldChange}
+          handleSubmit={handleSubmit}
         />
-        {loading && (
-          <Spinner/>
-        )}
-      </form>
+      )}
+      {formState.stage === 2 && (
+        <Success formState={formState}/>
+      )}
       {submissionError.status && (
         <>
           <h2>Error submitting form. Please try again! </h2>
