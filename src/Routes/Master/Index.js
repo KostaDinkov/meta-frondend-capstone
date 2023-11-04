@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
+import { Outlet } from "react-router-dom";
 
-export default function ConfirmedBooking() {
+export default function Master() {
   return (
     <>
-      <main>
-        <h1>Success</h1>
-        <p>Your reservation was accepted.</p>
-      </main>
+      <Header />
+      <Outlet />
+      <Footer />
     </>
   );
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./Routes/Home";
+import Home from "./Routes/Home";
+import Master from "./Routes/Master/Index";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import BookingPage from "./Routes/BookingPage";
@@ -10,24 +11,34 @@ import ConfirmedBooking from "./Routes/ConfirmedBooking";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <Master />,
     errorElement: <div>404 Not found</div>,
+    children: [
+      {
+        index:true,
+        element:<Home/>
+      },
+      {
+        path: "booking",
+        element: <BookingPage />,
+        children:[
+          
+        ]
+      },
+      {
+        path: "confirmation",
+        element: <ConfirmedBooking />,
+      },
+    ],
   },
-  {
-    path: "/booking",
-    element: <ApiProvider><BookingPage/></ApiProvider>,
-
-  },
-  {
-    path:"/confirmation",
-    element:<ConfirmedBooking/>
-  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <ApiProvider>
+      <RouterProvider router={router} />
+    </ApiProvider>
   </React.StrictMode>
 );
 

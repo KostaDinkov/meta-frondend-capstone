@@ -50,7 +50,6 @@ export default function BookingPage() {
 
   return (
     <>
-      <Header />
       <main className={styles.bookingPageMain}>
         <BookingForm
           availableTimes={availableTimes}

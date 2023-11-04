@@ -9,6 +9,7 @@ import {
   validateForm,
 } from "./validators";
 import Selector from "./Selector";
+import Spinner from "../Elements/Spinner";
 
 const defaultFormState = {
   date: {
@@ -233,9 +234,7 @@ export default function BookingForm({
           value="Make Your reservation"
         />
         {loading && (
-          <div className={styles.spinnerOverlay}>
-            <div className={styles.spinner}></div>
-          </div>
+          <Spinner/>
         )}
       </form>
       {submissionError.status && (
