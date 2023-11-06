@@ -1,24 +1,17 @@
-.positionHeader{
-    display: flex;
-    justify-content: space-between;
-    flex: 1 1 0;
-    gap:1rem;
-    
-    
+.positionHeader {
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 0;
+  gap: 1rem;
 }
 
-
-
-.positionFooter{
-    display:flex;
-    flex-direction: column;
-    
+.positionFooter {
+  display: flex;
+  flex-direction: column;
 }
 
-
-@media screen and (max-width: 425px){
-    nav{
-        display:none;
-    }
+@media screen and (max-width: 475px) {
+  nav {
+    display: none;
+  }
 }
-

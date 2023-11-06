@@ -38,6 +38,9 @@ code {
 }
 #root{
   min-height: 100vh;
-  display:grid;
-  grid-template-rows: min-content auto min-content;
+  display:flex;
+  flex-direction: column;
+}
+main{
+  flex: 1 1 0
 }

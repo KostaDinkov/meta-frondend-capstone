@@ -28,14 +28,14 @@ export default function BookingPage() {
       setMaxTableSize(mts);
     })();
   }, []);
-  
+
   async function updateTimes(date, guests) {
     setLoading(true)
     const result = await api.fetchAPI(date, guests);
     dispatch({ type: "update_times", data: result });
     setLoading(false);
   }
- 
+
   async function submitForm(formData) {
     setLoading(true)
     const result = await api.submitAPI(formData);
