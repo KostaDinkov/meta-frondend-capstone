@@ -2,10 +2,23 @@ import React from "react";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 
+
+
 export default function Nav({ position }) {
-  const menuStyle =
-    position === "footer" ? styles.positionFooter : styles.positionHeader;
-  return (
+
+
+  let menuStyle;
+    switch (position){
+      case "footer": menuStyle = styles.positionFooter;
+        break;
+      case "overlay": menuStyle = styles.positionOverlay;
+        break;
+      default: menuStyle = styles.positionHeader;
+        break;
+
+    }
+
+    return (
     <nav>
       <menu className={menuStyle}>
         <Link to="/">Home</Link>
@@ -15,6 +28,7 @@ export default function Nav({ position }) {
         <Link to="#">Order Online</Link>
         <Link to="#">Login</Link>
       </menu>
+      
     </nav>
   );
 }

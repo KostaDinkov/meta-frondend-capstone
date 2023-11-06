@@ -1,21 +1,96 @@
 @use "../../base" as base;
 header {
-    background-color: base.$color-highlight-light;
-    padding-bottom: 2rem;
+  background-color: base.$color-highlight-light;
+  padding-bottom: 2rem;
 }
 
-.headerContent{
-    @extend .section-content;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-
+.headerContent {
+  @extend .section-content;
+  display: grid;
+  gap:1rem;
+  grid-template-areas: "logo logoText nav";
+  align-items: center;
 }
 
-.headerLogo{
-    max-width: 300px;
-    min-width: 200px;
+.headerLogo {
+  grid-area: logo;
+  
+  width:100%;
+  height: auto;
 }
 
+.logoText {
+  display: flex;
+  gap:1rem;
+  grid-area: logoText;
+}
+
+.headerContent nav{
+    grid-area: nav
+}
+
+.logoType {
+  font-family: "Markazi Text", serif;
+  font-weight: 700;
+  font-size: 3rem;
+  letter-spacing: 3px;
+  color: base.$color-primary-dark;
+}
+
+
+.hamburger {
+  display: none;
+}
+@media screen and (max-width: 900px){
+    .headerContent{
+        grid-template-areas: "logo logoText"
+                             "logo nav";
+        grid-template-columns: min-content auto;
+            
+    }
+    .headerLogo{
+        width:100px;
+    }
+}
+@media screen and (max-width: 585px){
+    .headerContent{
+        grid-template-areas: "logo logoText"
+                             "nav nav";
+        grid-template-columns: min-content auto;
+            
+    }
+    .headerLogo{
+        width: 50px;
+    }
+}
+
+@media screen and (max-width: 475px) {
+  .hamburger {
+    display: inline-block;
+    cursor: pointer;
+    align-self: flex-start;
+    grid-area: hamburger;
+  }
+  .headerContent{
+    grid-template-areas: "logo logoText hamburger"
+                         "logo _ hamburger";
+    grid-template-columns: min-content auto min-content;
+    gap:0.5rem;
+  }
+  .headerContent nav{
+    display:none;
+  }
+//   .headerLogo{
+//     height:auto;
+//     width: 10vw;
+//   }
+  .logoText{
+    flex-direction: column;
+    justify-content:start;
+    gap:0;
+    
+  }
+  .logoType{
+    font-size: 2rem;
+  }
+}

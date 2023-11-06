@@ -5,13 +5,26 @@
   gap: 1rem;
 }
 
-.positionFooter {
+.positionFooter, .positionOverlay {
   display: flex;
   flex-direction: column;
 }
 
+.positionOverlay{
+  margin-top: 2rem;
+  align-items: center;
+  font-size: 2rem;
+  gap:1rem;
+}
+.positionOverlay a{
+  width:100%;
+  text-align: center;
+}
+
+
+
 @media screen and (max-width: 475px) {
-  nav {
+  .positionHeader {
     display: none;
   }
 }

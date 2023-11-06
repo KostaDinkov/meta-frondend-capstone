@@ -8,6 +8,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import BookingPage from "./Routes/BookingPage";
 import ApiProvider from "./Context/FakeApiContext";
 import ConfirmedBooking from "./Routes/ConfirmedBooking";
+import OverlayProvider from "./Context/OverlayContext";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,7 +38,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ApiProvider>
-      <RouterProvider router={router} />
+      <OverlayProvider>
+        <RouterProvider router={router} />
+      </OverlayProvider>
     </ApiProvider>
   </React.StrictMode>
 );
