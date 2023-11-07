@@ -7,9 +7,10 @@ import Spinner from "../Elements/Spinner";
 export default function CheckAvailability(
   {formState,
   setFormState,
-  handleFieldChange}
+  handleFieldChange,
+  api}
 ) {
-  const api = useFakeApi();
+  
 
   const checkAvailableTimes = async (e) => {
     e.preventDefault();

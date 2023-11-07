@@ -151,6 +151,7 @@ export default function BookingForm({api, maxTableSize}) {
           formState={formState}
           setFormState={setFormState}
           handleFieldChange={handleFieldChange}
+          api={api}
         />
       )}
       {formState.stage === 1 && (

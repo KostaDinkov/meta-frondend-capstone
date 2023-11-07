@@ -40,7 +40,9 @@ const tables = [
     minGuests: 9,
   },
 ];
-const api = new FakeReservationsApi(allHours, tables);
+const isNetworkDelay = false;
+const isRandomSuccess = false;
+const api = new FakeReservationsApi({allHours, tables, isRandomSuccess, isNetworkDelay});
 
 describe("getSuitableTables", () => {
   test("returns tables array with 2 suitable tables when guest size is 1", () => {
