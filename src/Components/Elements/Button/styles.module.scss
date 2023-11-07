@@ -1,35 +1,32 @@
 @use "../../../base" as base;
 
-.button{
-    border:none;
-    border-radius: 8px;
-    padding:0.5rem;
+.button {
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  transition: filter 0.1s ease-in;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  filter: brightness(1);
+  &:hover {
+    filter: brightness(1.1);
     transition: filter 0.1s ease-in;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    filter: brightness(1);
-    &:hover{
-        filter: brightness(1.1);
-        transition: filter 0.1s ease-in;
-        cursor: pointer;
-    }
-    
+    cursor: pointer;
+  }
 }
-.primary{
-    background-color: base.$color-primary-yellow;
-    color:black;
-    font-weight: bold;
-    
+.primary {
+  background-color: base.$color-primary-yellow;
+  color: black;
+  font-weight: bold;
 }
-.disabled{
-    background-color: base.$color-highlight-light;
-    border: 1px solid base.$color-highlight-dark;
-    color: base.$color-primary-dark;
-    cursor: not-allowed;
+.disabled {
+  background-color: base.$color-highlight-light;
+  border: 1px solid base.$color-highlight-dark;
+  color: base.$color-primary-dark;
+  cursor: not-allowed;
 }
 
-.normal{
-    background-color: base.$color-primary-dark;
-    color: base.$color-highlight-light;
+.normal {
+  background-color: base.$color-primary-dark;
+  color: base.$color-highlight-light;
 }
-
-

@@ -1,72 +1,91 @@
-export default class FakeReservationsApi {
-  reservations = {
-    "2023-11-03": [
-      {
-        tableId: 0,
-        reservedTimes: ["20:00", "21:00","22:00"],
-      },
-      {
-        tableId: 1,
-        reservedTimes: ["17:00", "21:00"],
-      },
-      {
-        tableId: 2,
-        reservedTimes: ["17:00", "21:00"],
-      },
-      {
-        tableId: 3,
-        reservedTimes: ["17:00", "21:00"],
-      },
-      {
-        tableId: 6,
-        reservedTimes: ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"],
-      },
-    ],
-  };
-  allHours = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
-  tables = [
+import {format, add} from 'date-fns';
+
+
+const tomorrow = format(add(new Date(), {days:1}),"yyyy-MM-dd");
+const reservationsDefault = {
+  [tomorrow]: [
     {
       tableId: 0,
-      seats: 4,
-      minGuests: 3,
+      reservedTimes: ["20:00", "21:00", "22:00"],
     },
     {
       tableId: 1,
-      seats: 4,
-      minGuests: 3,
+      reservedTimes: ["17:00", "21:00"],
     },
     {
       tableId: 2,
-      seats: 2,
-      minGuests: 1,
+      reservedTimes: ["17:00", "21:00"],
     },
     {
       tableId: 3,
-      seats: 2,
-      minGuests: 1,
-    },
-    {
-      tableId: 4,
-      seats: 6,
-      minGuests: 5,
-    },
-    {
-      tableId: 5,
-      seats: 8,
-      minGuests: 6,
+      reservedTimes: ["17:00", "21:00"],
     },
     {
       tableId: 6,
-      seats: 12,
-      minGuests: 9,
+      reservedTimes: ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"],
     },
-    {
-        tableId: 7,
-        seats: 16,
-        minGuests: 13,
-      },
-  ];
+  ],
+};
+const allHoursDefault = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+const tablesDefault = [
+  {
+    tableId: 0,
+    seats: 2,
+    minGuests: 1,
+  },
+  {
+    tableId: 1,
+    seats: 2,
+    minGuests: 1,
+  },
+  {
+    tableId: 2,
+    seats: 4,
+    minGuests: 3,
+  },
+  {
+    tableId: 3,
+    seats: 4,
+    minGuests: 3,
+  },
+  {
+    tableId: 4,
+    seats: 6,
+    minGuests: 5,
+  },
+  {
+    tableId: 5,
+    seats: 8,
+    minGuests: 6,
+  },
+  {
+    tableId: 6,
+    seats: 12,
+    minGuests: 9,
+  },
+  {
+    tableId: 7,
+    seats: 16,
+    minGuests: 13,
+  },
+];
+const isNetworkDelayDefault = true;
+const isRandomSuccessDefault = true;
 
+export default class FakeReservationsApi {
+  constructor({
+    allHours = allHoursDefault,
+    tables = tablesDefault,
+    reservations = reservationsDefault,
+    isNetworkDelay = isNetworkDelayDefault,
+    isRandomSuccess = isRandomSuccessDefault,
+  }={}) {
+    this.reservations = reservations;
+    this.allHours = allHours;
+    this.tables = tables;
+    this.isNetworkDelay = isNetworkDelay;
+    this.isRandomSuccess = isRandomSuccess;
+  }
 
   getSuitableTables(guests) {
     let suitableTables = this.tables.filter(
@@ -76,7 +95,9 @@ export default class FakeReservationsApi {
   }
   async fetchAPI(dateString, guests) {
     //add fake network delay
-    await new Promise((r) => setTimeout(r, 2000));
+    if (this.isNetworkDelay) {
+      await new Promise((r) => setTimeout(r, 2000));
+    }
 
     let availableHours = new Set();
 
@@ -111,45 +132,53 @@ export default class FakeReservationsApi {
     }
     return Array.from(availableHours);
   }
-  async submitAPI(formData){
+  async submitAPI(formData) {
     //add fake network delay
-    await new Promise((r) => setTimeout(r, 2000));
-    let randomFail = Math.round(Math.random()*100);
-    if(randomFail>50){
-      return{message:`Fake Api error. Random number was ${randomFail}. For success, random number should be below 50. Hit Submit Button again`}
+    if (this.isNetworkDelay) {
+      await new Promise((r) => setTimeout(r, 2000));
     }
+    if (this.isRandomSuccess) {
+      let randomFail = Math.round(Math.random() * 100);
+      if (randomFail > 50) {
+        return {
+          message: `Fake Api error. Random number was ${randomFail}. For success, random number should be below 50. Hit Submit Button again`,
+        };
+      }
+    }
+
     let suitableTables = this.getSuitableTables(formData.guests);
-    if (!this.reservations.hasOwnProperty(formData.date)){
-        this.reservations[formData.date] = [];
+    if (!this.reservations.hasOwnProperty(formData.date)) {
+      this.reservations[formData.date] = [];
     }
 
-    for(let sTable of suitableTables){
-        let reserved = this.reservations[formData.date]?.find(t=>t.tableId === sTable.tableId)
-        if(!reserved){
-            this.reservations[formData.date].push({
-                tableId:sTable.tableId,
-                reservedTimes:[formData.time]
-            })
-            return {message:"success"}
-        }
-        if (reserved.reservedTimes.includes(formData.time)){
-            continue;
-        }
-        else{
-            reserved.reservedTimes = [...reserved.reservedTimes, formData.time]
+    for (let sTable of suitableTables) {
+      let reserved = this.reservations[formData.date]?.find(
+        (t) => t.tableId === sTable.tableId
+      );
+      if (!reserved) {
+        this.reservations[formData.date].push({
+          tableId: sTable.tableId,
+          reservedTimes: [formData.time],
+        });
+        return { message: "success" };
+      }
+      if (reserved.reservedTimes.includes(formData.time)) {
+        continue;
+      } else {
+        reserved.reservedTimes = [...reserved.reservedTimes, formData.time];
 
-            return {message:"success"}
-        }
+        return { message: "success" };
+      }
     }
-    return {message:"fail"}
+    return { message: "fail" };
   }
 
-  async getMaxTableSize(){
+  async getMaxTableSize() {
     let maxTableSize = 0;
-    for(let table of this.tables){
-        if(table.seats>maxTableSize){
-            maxTableSize = table.seats;
-        }
+    for (let table of this.tables) {
+      if (table.seats > maxTableSize) {
+        maxTableSize = table.seats;
+      }
     }
     return maxTableSize;
   }

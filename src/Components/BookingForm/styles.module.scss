@@ -1,7 +1,7 @@
 @use "../../base" as base;
 
 .bookingForm {
-  position:relative;  
+  position:relative;
   display: grid;
   max-width: 250px;
   gap: 5px;
@@ -50,6 +50,13 @@ form input, select{
   background-color: base.$color-primary-dark;
   color:base.$color-highlight-light;
   border:none;
+}
+
+.submissionError{
+  margin-top:1rem;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 

@@ -42,12 +42,12 @@
   display: inline;
   padding: 2px 4px;
   border-radius: 8px;
-  background-color: black;
+  background-color: base.$color-primary-dark;
   color: white;
 }
 
 .badgeRed {
   @extend .badge;
-  background-color: red;
-  color:white;
+  background-color: base.$color-secondary-peach;
+  color:base.$color-highlight-dark;
 }

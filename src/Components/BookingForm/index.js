@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
-import ErrorField from "../Elements/FormErrorField";
 import {
   validateDate,
   validateTime,
@@ -11,6 +10,7 @@ import {
 import CheckAvailability from "./CheckAvailability";
 import SubmitForm from "./SubmitForm";
 import Success from "./Success";
+
 
 const defaultFormState = {
   date: {
@@ -43,22 +43,21 @@ const defaultFormState = {
   stage: 0,
   maxTableSize: 0,
 };
-export default function BookingForm({ resetTimes, submitForm, maxTableSize }) {
+
+export default function BookingForm({api, maxTableSize}) {
   const [formState, setFormState] = useState(defaultFormState);
+
   const [submissionError, setSubmissionError] = useState({
     status: false,
     message: "",
   });
 
   useEffect(() => {
-    setFormState({ ...formState, maxTableSize });
+    (async () => {
+      setFormState({...formState, maxTableSize})
+    })();
   }, [maxTableSize]);
 
-  useEffect(() => {
-    if (!formState.date.isValid || !formState.guests.isValid) {
-      resetTimes();
-    }
-  }, [formState.date, formState.guests]);
 
   useEffect(() => {
     if (
@@ -86,7 +85,7 @@ export default function BookingForm({ resetTimes, submitForm, maxTableSize }) {
         occasion: formState.occasion.value,
       };
       setFormState({ ...formState, isLoading: true });
-      const submissionResult = await submitForm(formData);
+      const submissionResult = await api.submitAPI(formData);
       setFormState({ ...formState, isLoading: false });
 
       if (submissionResult.message === "success") {
@@ -165,12 +164,12 @@ export default function BookingForm({ resetTimes, submitForm, maxTableSize }) {
       {formState.stage === 2 && (
         <Success formState={formState}/>
       )}
-      {submissionError.status && (
-        <>
+      {submissionError.status && 
+        <div className={styles.submissionError} role='alert' aria-label="Submission Error alert">
           <h2>Error submitting form. Please try again! </h2>
           <p>{submissionError.message}</p>
-        </>
-      )}
+        </div>
+      }
     </>
   );
 }

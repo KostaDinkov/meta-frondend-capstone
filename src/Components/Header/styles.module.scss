@@ -7,26 +7,26 @@ header {
 .headerContent {
   @extend .section-content;
   display: grid;
-  gap:1rem;
+  gap: 1rem;
   grid-template-areas: "logo logoText nav";
   align-items: center;
 }
 
 .headerLogo {
   grid-area: logo;
-  
-  width:100%;
+
+  width: 100%;
   height: auto;
 }
 
 .logoText {
   display: flex;
-  gap:1rem;
+  gap: 1rem;
   grid-area: logoText;
 }
 
-.headerContent nav{
-    grid-area: nav
+.headerContent nav {
+  grid-area: nav;
 }
 
 .logoType {
@@ -37,31 +37,30 @@ header {
   color: base.$color-primary-dark;
 }
 
-
 .hamburger {
   display: none;
 }
-@media screen and (max-width: 900px){
-    .headerContent{
-        grid-template-areas: "logo logoText"
-                             "logo nav";
-        grid-template-columns: min-content auto;
-            
-    }
-    .headerLogo{
-        width:100px;
-    }
+@media screen and (max-width: 900px) {
+  .headerContent {
+    grid-template-areas:
+      "logo logoText"
+      "logo nav";
+    grid-template-columns: min-content auto;
+  }
+  .headerLogo {
+    width: 100px;
+  }
 }
-@media screen and (max-width: 585px){
-    .headerContent{
-        grid-template-areas: "logo logoText"
-                             "nav nav";
-        grid-template-columns: min-content auto;
-            
-    }
-    .headerLogo{
-        width: 50px;
-    }
+@media screen and (max-width: 585px) {
+  .headerContent {
+    grid-template-areas:
+      "logo logoText"
+      "nav nav";
+    grid-template-columns: min-content auto;
+  }
+  .headerLogo {
+    width: 50px;
+  }
 }
 
 @media screen and (max-width: 475px) {
@@ -71,26 +70,26 @@ header {
     align-self: flex-start;
     grid-area: hamburger;
   }
-  .headerContent{
-    grid-template-areas: "logo logoText hamburger"
-                         "logo _ hamburger";
+  .headerContent {
+    grid-template-areas:
+      "logo logoText hamburger"
+      "logo _ hamburger";
     grid-template-columns: min-content auto min-content;
-    gap:0.5rem;
+    gap: 0.5rem;
   }
-  .headerContent nav{
-    display:none;
+  .headerContent nav {
+    display: none;
   }
-//   .headerLogo{
-//     height:auto;
-//     width: 10vw;
-//   }
-  .logoText{
+  //   .headerLogo{
+  //     height:auto;
+  //     width: 10vw;
+  //   }
+  .logoText {
     flex-direction: column;
-    justify-content:start;
-    gap:0;
-    
+    justify-content: start;
+    gap: 0;
   }
-  .logoType{
+  .logoType {
     font-size: 2rem;
   }
 }

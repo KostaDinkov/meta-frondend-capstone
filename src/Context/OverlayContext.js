@@ -4,7 +4,7 @@ const OverlayContext = createContext(null);
 
 export default function OverlayProvider ({children}){
 
-    const [overlayState, setOverlayState] = useState({isOpen:true})
+    const [overlayState, setOverlayState] = useState({isOpen:false})
     return(
         <OverlayContext.Provider value={{overlayState, setOverlayState}} >
             {children}

@@ -7,7 +7,7 @@ export default function HighlightCard({ data }) {
       <img src={data.imageSrc} alt="" />
       <div className={styles.info}>
         <div className={styles.row}>
-          <h3>{data.title}</h3>{" "}
+          <h2>{data.title}</h2>{" "}
           <span className={styles.badgeRed}>
             <span className={styles.price}>{data.price}</span>
           </span>

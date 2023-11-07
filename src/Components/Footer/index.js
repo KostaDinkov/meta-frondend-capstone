@@ -11,14 +11,14 @@ export default function Footer() {
           <img src={logo} alt="Little restaurant logo"/>
         </article>
         <article >
-          <h3>Contacts</h3>
+          <h2>Contacts</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
             quam alias eligendi cupiditate animi quia voluptates quos doloremque
           </p>
         </article>
         <article className={styles.socialMedia}>
-          <h3>Links to social media</h3>
+          <h2>Links to social media</h2>
           <ul>
             <li>
               <a href="https://www.facebook.com">Facebook</a>
@@ -32,7 +32,7 @@ export default function Footer() {
           </ul>
         </article>
         <article className="footer-navigation">
-          <h3>Site Navigation</h3>
+          <h2>Site Navigation</h2>
           <Nav position={"footer"} />
         </article>
       </div>
