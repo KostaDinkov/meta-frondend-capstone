@@ -1,5 +1,5 @@
 import React from "react";
-import heroImage from "../../Images/img_1.jpg";
+import heroImage from "../../Images/tomato-olive-pizza.jpg";
 import styles from "./styles.module.scss";
 import Button from "../Elements/Button";
 import { Link } from "react-router-dom";
