@@ -1,7 +1,6 @@
 @use "../../base" as base;
 header {
   background-color: base.$color-highlight-light;
-  padding-bottom: 2rem;
 }
 
 .headerContent {
@@ -14,8 +13,6 @@ header {
 
 .headerLogo {
   grid-area: logo;
-
-  width: 100%;
   height: auto;
 }
 
@@ -45,13 +42,18 @@ header {
     grid-template-areas:
       "logo logoText"
       "logo nav";
+    row-gap: 0;
+    align-items: start;
     grid-template-columns: min-content auto;
   }
   .headerLogo {
-    width: 100px;
+    width: 80px;
   }
 }
 @media screen and (max-width: 585px) {
+  header {
+    padding-bottom: 1.5rem;
+  }
   .headerContent {
     grid-template-areas:
       "logo logoText"
@@ -63,7 +65,10 @@ header {
   }
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 480px) {
+  header {
+    padding-bottom: 0;
+  }
   .hamburger {
     display: inline-block;
     cursor: pointer;
