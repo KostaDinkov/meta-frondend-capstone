@@ -14,13 +14,14 @@ export default function SubmitForm({
   return (
     <>
       <h1>Choose Time</h1>
-
-      <form className={styles.bookingForm} onSubmit={handleSubmit}>
-        <p>{`We found available tables for ${formState.guests.value} ${
+      <p>{`We found available tables for ${formState.guests.value} ${
             formState.guests.value > 1 ? "guests" : "guest"
           } for ${
             format(new Date(formState.date.value), "PPPP")
           }. Select time from the list below.`}</p>
+
+      <form className={styles.bookingForm} onSubmit={handleSubmit}>
+       
         <Selector
           name="time"
           label="Time"
@@ -55,7 +56,7 @@ export default function SubmitForm({
             className={styles.buttonMain}
               disabled={!formState.isValid || formState.isLoading}
 
-            >Make Your reservation</button>
+            >Book now</button>
         </div>
         <Spinner visible={formState.isLoading} />
       </form>
