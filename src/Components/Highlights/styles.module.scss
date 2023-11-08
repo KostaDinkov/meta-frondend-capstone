@@ -1,25 +1,24 @@
 @use "../../base" as base;
 
 .highlightsSection {
-    background-color: base.$color-highlight-light;
-    padding-top: 2.5rem;
+  background-color: base.$color-highlight-light;
+  padding-top: 2.5rem;
 }
 
-.highlightsContent{
-    @extend .section-content;
+.highlightsContent {
+  @extend .section-content;
 }
 
-.headingBar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
+.headingBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
 }
 
- .cardsContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap:1rem;
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
 }
-

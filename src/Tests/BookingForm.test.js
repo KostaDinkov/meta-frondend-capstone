@@ -65,7 +65,7 @@ describe("Reservation form stage 0", () => {
       const button = screen.getByText(/check availability/i);
 
       expect(button).not.toHaveAttribute("disabled");
-    }
+    },
   );
 
   const invalidDateGuests = [
@@ -87,7 +87,7 @@ describe("Reservation form stage 0", () => {
       const button = screen.getByText(/check availability/i);
 
       expect(button).toHaveAttribute("disabled");
-    }
+    },
   );
 });
 
@@ -160,7 +160,7 @@ describe("Reservation form stage 1", () => {
     within(timeInput)
       .findAllByRole("option")
       .then((options) => {
-        fireEvent.change(timeInput, {target: {value: options[1].value}});
+        fireEvent.change(timeInput, { target: { value: options[1].value } });
       });
 
     expect(reservationButton).not.toHaveAttribute("disabled");

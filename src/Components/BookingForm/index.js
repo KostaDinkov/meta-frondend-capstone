@@ -11,7 +11,6 @@ import CheckAvailability from "./CheckAvailability";
 import SubmitForm from "./SubmitForm";
 import Success from "./Success";
 
-
 const defaultFormState = {
   date: {
     value: "",
@@ -44,7 +43,7 @@ const defaultFormState = {
   maxTableSize: 0,
 };
 
-export default function BookingForm({api, maxTableSize}) {
+export default function BookingForm({ api, maxTableSize }) {
   const [formState, setFormState] = useState(defaultFormState);
 
   const [submissionError, setSubmissionError] = useState({
@@ -54,10 +53,9 @@ export default function BookingForm({api, maxTableSize}) {
 
   useEffect(() => {
     (async () => {
-      setFormState({...formState, maxTableSize})
+      setFormState({ ...formState, maxTableSize });
     })();
   }, [maxTableSize]);
-
 
   useEffect(() => {
     if (
@@ -66,7 +64,7 @@ export default function BookingForm({api, maxTableSize}) {
       formState.guests.isValid
     ) {
       setFormState({ ...formState, isValid: true });
-      console.log(`form is valid. time = ${formState.time.value}`)
+      console.log(`form is valid. time = ${formState.time.value}`);
     } else {
       setFormState({ ...formState, isValid: false });
     }
@@ -162,15 +160,17 @@ export default function BookingForm({api, maxTableSize}) {
           handleSubmit={handleSubmit}
         />
       )}
-      {formState.stage === 2 && (
-        <Success formState={formState}/>
-      )}
-      {submissionError.status &&
-        <div className={styles.submissionError} role='alert' aria-label="Submission Error alert">
+      {formState.stage === 2 && <Success formState={formState} />}
+      {submissionError.status && (
+        <div
+          className={styles.submissionError}
+          role="alert"
+          aria-label="Submission Error alert"
+        >
           <h2>Error submitting form. Please try again! </h2>
           <p>{submissionError.message}</p>
         </div>
-      }
+      )}
     </>
   );
 }

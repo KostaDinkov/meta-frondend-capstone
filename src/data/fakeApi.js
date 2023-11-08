@@ -1,7 +1,6 @@
-import {format, add} from 'date-fns';
+import { format, add } from "date-fns";
 
-
-const tomorrow = format(add(new Date(), {days:1}),"yyyy-MM-dd");
+const tomorrow = format(add(new Date(), { days: 1 }), "yyyy-MM-dd");
 const reservationsDefault = {
   [tomorrow]: [
     {
@@ -79,7 +78,7 @@ export default class FakeReservationsApi {
     reservations = reservationsDefault,
     isNetworkDelay = isNetworkDelayDefault,
     isRandomSuccess = isRandomSuccessDefault,
-  }={}) {
+  } = {}) {
     this.reservations = reservations;
     this.allHours = allHours;
     this.tables = tables;
@@ -89,7 +88,7 @@ export default class FakeReservationsApi {
 
   getSuitableTables(guests) {
     let suitableTables = this.tables.filter(
-      (t) => t.minGuests <= guests && guests <= t.seats
+      (t) => t.minGuests <= guests && guests <= t.seats,
     );
     return suitableTables;
   }
@@ -117,7 +116,7 @@ export default class FakeReservationsApi {
       for (const table of suitableTables) {
         //if a suitable table is not reserved for the date - return all possible hours
         let tableWithRes = this.reservations[dateString].find(
-          (t) => t.tableId === table.tableId
+          (t) => t.tableId === table.tableId,
         );
         if (tableWithRes) {
           for (const hour of this.allHours) {
@@ -153,7 +152,7 @@ export default class FakeReservationsApi {
 
     for (let sTable of suitableTables) {
       let reserved = this.reservations[formData.date]?.find(
-        (t) => t.tableId === sTable.tableId
+        (t) => t.tableId === sTable.tableId,
       );
       if (!reserved) {
         this.reservations[formData.date].push({

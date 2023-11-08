@@ -12,29 +12,29 @@ export default function SubmitForm({
   handleSubmit,
 }) {
   const [isAvailable, setIsAvailable] = useState(false);
-  const availableText = `We found available tables for ${formState.guests.value} ${
-    formState.guests.value > 1 ? "guests" : "guest"
-  } for ${format(
+  const availableText = `We found available tables for ${
+    formState.guests.value
+  } ${formState.guests.value > 1 ? "guests" : "guest"} for ${format(
     new Date(formState.date.value),
-    "PPPP"
-  )}. Select time from the list below.`
-  const availableHeading = "Choose Time"
-  const unavailableHeading = "Sorry!"
-  const unavailableText = `We couldn't find available tables for ${formState.guests.value} ${
-    formState.guests.value > 1 ? "guests" : "guest"
-  } for ${format(
+    "PPPP",
+  )}. Select time from the list below.`;
+  const availableHeading = "Choose Time";
+  const unavailableHeading = "Sorry!";
+  const unavailableText = `We couldn't find available tables for ${
+    formState.guests.value
+  } ${formState.guests.value > 1 ? "guests" : "guest"} for ${format(
     new Date(formState.date.value),
-    "PPPP"
-  )}`
-  
+    "PPPP",
+  )}`;
+
   useEffect(() => {
     setIsAvailable(formState.availableTimes.length > 0);
   }, [formState]);
 
   return (
     <>
-      <h1>{isAvailable?availableHeading:unavailableHeading}</h1>
-      <p>{isAvailable?availableText:unavailableText}</p>
+      <h1>{isAvailable ? availableHeading : unavailableHeading}</h1>
+      <p>{isAvailable ? availableText : unavailableText}</p>
 
       <form className={styles.bookingForm} onSubmit={handleSubmit}>
         {isAvailable && (
@@ -60,7 +60,11 @@ export default function SubmitForm({
             />
           </>
         )}
-        <div className={isAvailable?styles.submitBtnGroup:styles.submitBtnGroupCenter}>
+        <div
+          className={
+            isAvailable ? styles.submitBtnGroup : styles.submitBtnGroupCenter
+          }
+        >
           <button
             className={styles.button}
             disabled={formState.isLoading}
@@ -76,12 +80,14 @@ export default function SubmitForm({
           >
             Back
           </button>
-          {isAvailable && <button
-            className={styles.buttonMain}
-            disabled={!formState.isValid || formState.isLoading}
-          >
-            Book now
-          </button>}
+          {isAvailable && (
+            <button
+              className={styles.buttonMain}
+              disabled={!formState.isValid || formState.isLoading}
+            >
+              Book now
+            </button>
+          )}
         </div>
         <Spinner visible={formState.isLoading} />
       </form>

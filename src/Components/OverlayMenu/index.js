@@ -16,7 +16,11 @@ export default function OverlayMenu() {
         <div className={styles.overlayHeader}>
           <h1>Little Lemon</h1>
         </div>
-        <div className={styles.closeButton} onClick={handleBtnClick} aria-label="Close button">
+        <div
+          className={styles.closeButton}
+          onClick={handleBtnClick}
+          aria-label="Close button"
+        >
           X
         </div>
 

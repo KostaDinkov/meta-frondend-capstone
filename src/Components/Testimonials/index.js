@@ -9,7 +9,7 @@ export default function Testimonials() {
     <section className={styles.testimonialsSection}>
       <div className={styles.testimonialsContent}>
         <h2>Testimonials</h2>
-        <ScrollContainer  >
+        <ScrollContainer>
           <div className={styles.testimonialsCards}>
             {testimonialsData.map((data) => (
               <TestimonialCard key={data.name} data={data} />

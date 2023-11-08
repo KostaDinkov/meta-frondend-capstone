@@ -21,7 +21,9 @@ export default function Header() {
           className={styles.hamburger}
           src={menuIcon}
           alt="hamburger menu icon"
-          onClick={()=>{setOverlayState({isOpen:true})}}
+          onClick={() => {
+            setOverlayState({ isOpen: true });
+          }}
         />
       </div>
     </header>

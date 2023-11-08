@@ -42,7 +42,12 @@ const tables = [
 ];
 const isNetworkDelay = false;
 const isRandomSuccess = false;
-const api = new FakeReservationsApi({allHours, tables, isRandomSuccess, isNetworkDelay});
+const api = new FakeReservationsApi({
+  allHours,
+  tables,
+  isRandomSuccess,
+  isNetworkDelay,
+});
 
 describe("getSuitableTables", () => {
   test("returns tables array with 2 suitable tables when guest size is 1", () => {
@@ -157,7 +162,9 @@ describe("submitAPI", () => {
     };
     const response = await api.submitAPI(formData);
     expect(response.message).toBe("success");
-    expect(api.reservations[date][0].reservedTimes.includes("17:00")).toBeTruthy();
+    expect(
+      api.reservations[date][0].reservedTimes.includes("17:00"),
+    ).toBeTruthy();
   });
 
   test("fails to add a reservation for the given date and guest count when no available times", async () => {

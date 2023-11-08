@@ -1,16 +1,16 @@
 @use "../../base" as base;
 
-.testimonialsSection{
-    background-color: white;
-    padding-bottom:calc(7% + 2rem);
+.testimonialsSection {
+  background-color: white;
+  padding-bottom: calc(7% + 2rem);
 }
 
-.testimonialsContent{
-    @extend .section-content;
+.testimonialsContent {
+  @extend .section-content;
 }
 
-.testimonialsCards{
-    display:flex;
-    justify-content:flex-start;
-    gap: 2rem;
+.testimonialsCards {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
 }

@@ -16,15 +16,13 @@ const router = createBrowserRouter([
     errorElement: <div>404 Not found</div>,
     children: [
       {
-        index:true,
-        element:<Home/>
+        index: true,
+        element: <Home />,
       },
       {
         path: "booking",
         element: <BookingPage />,
-        children:[
-          
-        ]
+        children: [],
       },
       {
         path: "confirmation",
@@ -42,7 +40,7 @@ root.render(
         <RouterProvider router={router} />
       </OverlayProvider>
     </ApiProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

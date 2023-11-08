@@ -65,18 +65,18 @@
   }
 }
 @media screen and (max-width: 380px) {
-    .aboutContent {
-        grid-template-rows: 2fr 2fr 1fr 1fr auto;
-      }
+  .aboutContent {
+    grid-template-rows: 2fr 2fr 1fr 1fr auto;
+  }
   .headingText {
-    padding-top:5px;
+    padding-top: 5px;
     grid-row: 4 / span 1;
     grid-column: 1 / span 12;
     text-align: left;
   }
   .info {
     grid-column: 1 / span 12;
-    grid-row: 5/span 1;
+    grid-row: 5 / span 1;
     text-align: justify;
   }
   .imageFirst {

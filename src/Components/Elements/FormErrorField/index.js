@@ -7,5 +7,9 @@ export default function FormErrorField({ display, message }) {
   if (display) {
     stylesArray.push(styles.errorDisplay);
   } else stylesArray.push(styles.errorHide);
-  return <div className={stylesArray.join(" ")} role="alert">{message}</div>;
+  return (
+    <div className={stylesArray.join(" ")} role="alert">
+      {message}
+    </div>
+  );
 }

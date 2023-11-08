@@ -1,8 +1,8 @@
-export function resetField(){
-    return{
-        isValid:false,
-        value:'',
-        errorMessages:[],
-        isTouched:false
-    }
+export function resetField() {
+  return {
+    isValid: false,
+    value: "",
+    errorMessages: [],
+    isTouched: false,
+  };
 }

@@ -1,68 +1,68 @@
 @use "../../base" as base;
 
 .bookingForm {
-  position:relative;
+  position: relative;
   display: grid;
   width: 50%;
   min-width: 200px;
   gap: 5px;
 }
 
-.successDetails{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+.successDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   column-gap: 1rem;
 }
-.successLayout{
-  display:flex;
-  flex-direction:column;
+.successLayout {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items:center;
-  gap:1rem;
-  flex:1 1 0;
+  align-items: center;
+  gap: 1rem;
+  flex: 1 1 0;
 }
-form input, select{
+form input,
+select {
   border-radius: 8px;
   border: 1px solid base.$color-highlight-dark;
-  padding:5px;
+  padding: 5px;
 }
 
-.button, .buttonMain{
+.button,
+.buttonMain {
   border-radius: 8px;
   border: 1px solid black;
   font-size: 1rem;
-  padding:10px;
-  &:disabled{
+  padding: 10px;
+  &:disabled {
     background-color: base.$color-highlight-light;
-    border: none
+    border: none;
   }
 }
 
-.submitBtnGroup{
-  display:flex;
+.submitBtnGroup {
+  display: flex;
   justify-content: space-between;
 }
 
-.submitBtnGroupCenter{
-  display:flex;
+.submitBtnGroupCenter {
+  display: flex;
   justify-content: center;
 }
 
 .buttonMain {
-  background-color:base.$color-primary-yellow;
+  background-color: base.$color-primary-yellow;
 }
 
-.button{
+.button {
   background-color: base.$color-primary-dark;
-  color:base.$color-highlight-light;
-  border:none;
+  color: base.$color-highlight-light;
+  border: none;
 }
 
-.submissionError{
-  margin-top:1rem;
-  display:flex;
+.submissionError {
+  margin-top: 1rem;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-

@@ -17,14 +17,13 @@ export default function Hero() {
             Voluptatum ducimus sapiente magni nulla necessitatibus hic. Corporis
             debitis porro itaque suscipit aspernatur?
           </p>
-          <Link to="/booking"><Button type="primary">Reserve a table</Button></Link>
+          <Link to="/booking">
+            <Button type="primary">Reserve a table</Button>
+          </Link>
         </div>
 
         <div className={styles.imageContainer}>
-          <img
-            src={heroImage}
-            alt="dish with fish and potatoes"
-          />
+          <img src={heroImage} alt="dish with fish and potatoes" />
         </div>
       </div>
     </section>

@@ -5,23 +5,22 @@
   gap: 1rem;
 }
 
-.positionFooter, .positionOverlay {
+.positionFooter,
+.positionOverlay {
   display: flex;
   flex-direction: column;
 }
 
-.positionOverlay{
+.positionOverlay {
   margin-top: 2rem;
   align-items: center;
   font-size: 2rem;
-  gap:1rem;
+  gap: 1rem;
 }
-.positionOverlay a{
-  width:100%;
+.positionOverlay a {
+  width: 100%;
   text-align: center;
 }
-
-
 
 @media screen and (max-width: 475px) {
   .positionHeader {

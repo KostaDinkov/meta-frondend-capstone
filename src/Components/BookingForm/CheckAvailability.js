@@ -4,21 +4,19 @@ import ErrorField from "../Elements/FormErrorField";
 import { useFakeApi } from "../../Context/FakeApiContext";
 import Spinner from "../Elements/Spinner";
 
-export default function CheckAvailability(
-  {formState,
+export default function CheckAvailability({
+  formState,
   setFormState,
   handleFieldChange,
-  api}
-) {
-  
-
+  api,
+}) {
   const checkAvailableTimes = async (e) => {
     e.preventDefault();
 
     setFormState({ ...formState, isLoading: true });
     const result = await api.fetchAPI(
       formState.date.value,
-      Number(formState.guests.value)
+      Number(formState.guests.value),
     );
 
     setFormState({
@@ -31,7 +29,10 @@ export default function CheckAvailability(
   return (
     <>
       <h1>Make Your Reservation</h1>
-      <p>Please, select a date and number of guests from the lists below and we will check if there are available tables.</p>
+      <p>
+        Please, select a date and number of guests from the lists below and we
+        will check if there are available tables.
+      </p>
       <form className={styles.bookingForm} onSubmit={checkAvailableTimes}>
         <label htmlFor="res-date">Choose date</label>
         <input
@@ -80,7 +81,7 @@ export default function CheckAvailability(
             Check availability
           </button>
         }
-        <Spinner visible={formState.isLoading}/>
+        <Spinner visible={formState.isLoading} />
       </form>
     </>
   );

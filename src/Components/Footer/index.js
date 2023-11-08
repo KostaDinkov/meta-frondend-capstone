@@ -7,10 +7,10 @@ export default function Footer() {
   return (
     <footer>
       <div className={styles.footerContent}>
-        <article >
-          <img src={logo} alt="Little restaurant logo"/>
+        <article>
+          <img src={logo} alt="Little restaurant logo" />
         </article>
-        <article >
+        <article>
           <h2>Contacts</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto

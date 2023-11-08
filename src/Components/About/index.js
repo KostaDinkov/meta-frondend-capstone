@@ -7,10 +7,10 @@ export default function About() {
   return (
     <section className={styles.aboutSection}>
       <div className={styles.aboutContent}>
-          <div className={styles.headingText}>
-            <h3>Little Lemon</h3>
-            <span>Chicago</span>
-          </div>
+        <div className={styles.headingText}>
+          <h3>Little Lemon</h3>
+          <span>Chicago</span>
+        </div>
         <div className={styles.info}>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla
