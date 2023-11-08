@@ -30,7 +30,8 @@ export default function CheckAvailability(
   };
   return (
     <>
-      <h1>Book now</h1>
+      <h1>Make Your Reservation</h1>
+      <p>Please, select a date and number of guests from the lists below and we will check if there are available tables.</p>
       <form className={styles.bookingForm} onSubmit={checkAvailableTimes}>
         <label htmlFor="res-date">Choose date</label>
         <input
