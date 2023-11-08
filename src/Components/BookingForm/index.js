@@ -66,6 +66,7 @@ export default function BookingForm({api, maxTableSize}) {
       formState.guests.isValid
     ) {
       setFormState({ ...formState, isValid: true });
+      console.log(`form is valid. time = ${formState.time.value}`)
     } else {
       setFormState({ ...formState, isValid: false });
     }
@@ -143,7 +144,6 @@ export default function BookingForm({api, maxTableSize}) {
     return validationResult;
   };
 
-  //TODO-- handle situation where there are no avaliable times
   return (
     <>
       {formState.stage === 0 && (
@@ -165,7 +165,7 @@ export default function BookingForm({api, maxTableSize}) {
       {formState.stage === 2 && (
         <Success formState={formState}/>
       )}
-      {submissionError.status && 
+      {submissionError.status &&
         <div className={styles.submissionError} role='alert' aria-label="Submission Error alert">
           <h2>Error submitting form. Please try again! </h2>
           <p>{submissionError.message}</p>
