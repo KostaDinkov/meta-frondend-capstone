@@ -2,11 +2,9 @@
 
 
 ## About
-This project involves creating a single-page application in React for an imaginary restaurant. The primary tasks revolve around designing a home page that adapts well to various screen sizes and implementing a reservation form for tables. Additionally, the project mandates adhering to a specific style guide while crafting the design.
-
-![alt style guide](./style-guide.jpg)
-
-To achieve responsiveness, the strategy employed is to carefully contemplate the behavior of each component across various viewport sizes and establish unique styling rules and media queries for each individual component.
+|   |   |
+|---|---|
+|This project involves creating a single-page application in React for an imaginary restaurant. The primary tasks revolve around designing a home page that adapts well to various screen sizes and implementing a reservation form for tables. Additionally, the project mandates adhering to a specific style guide while crafting the design. To achieve responsiveness, the strategy employed is to carefully contemplate the behavior of each component across various viewport sizes and establish unique styling rules and media queries for each individual component.|![alt style guide](./style-guide.jpg)|
 
 ![alt website screenshot](./website-screenshot.png)
 |tablet|phone|
