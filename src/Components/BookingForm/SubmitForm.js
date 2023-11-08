@@ -3,6 +3,7 @@ import Selector from "./Selector";
 import styles from "./styles.module.scss";
 import Spinner from "../Elements/Spinner";
 import { resetField } from "./utils";
+import {format} from 'date-fns'
 
 export default function SubmitForm({
   formState,
@@ -15,13 +16,14 @@ export default function SubmitForm({
       <h1>Choose Time</h1>
 
       <form className={styles.bookingForm} onSubmit={handleSubmit}>
+        <p>{`We found available tables for ${formState.guests.value} ${
+            formState.guests.value > 1 ? "guests" : "guest"
+          } for ${
+            format(new Date(formState.date.value), "PPPP")
+          }. Select time from the list below.`}</p>
         <Selector
           name="time"
-          label={`We found available tables for ${formState.guests.value} ${
-            formState.guests.value > 1 ? "persons" : "person"
-          } for ${
-            formState.date.value
-          } with the following available time options.`}
+          label="Time"
           value={formState.time.value}
           options={formState.availableTimes}
           defaultOption={"Select time"}
