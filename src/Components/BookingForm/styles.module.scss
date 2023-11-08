@@ -3,7 +3,8 @@
 .bookingForm {
   position:relative;
   display: grid;
-  max-width: 250px;
+  width: 50%;
+  min-width: 200px;
   gap: 5px;
 }
 
