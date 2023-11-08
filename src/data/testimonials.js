@@ -12,16 +12,28 @@ export const testimonialsData = [
         rating: 5,
     },
     {
-        name: "Boris",
+        name: "Jim",
         image: "https://randomuser.me/api/portraits/med/men/2.jpg",
         comment: "Good food. Lacks service tho.",
         rating: 3,
     },
     {
-        name: "Jane",
+        name: "Alison",
+        image: "https://randomuser.me/api/portraits/med/women/3.jpg",
+        comment: "The online reservation form could be better",
+        rating: 4,
+    },
+    {
+        name: "Alex",
         image: "https://randomuser.me/api/portraits/med/women/2.jpg",
         comment: "The online reservation form could be better",
         rating: 4,
+    },
+    {
+        name: "Boris",
+        image: "https://randomuser.me/api/portraits/med/men/5.jpg",
+        comment: "The online reservation form could be better",
+        rating: 2,
     },
 
 ]
