@@ -43,6 +43,11 @@ form input, select{
   justify-content: space-between;
 }
 
+.submitBtnGroupCenter{
+  display:flex;
+  justify-content: center;
+}
+
 .buttonMain {
   background-color:base.$color-primary-yellow;
 }
