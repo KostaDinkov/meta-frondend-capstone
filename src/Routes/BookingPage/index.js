@@ -13,7 +13,7 @@ export default function BookingPage() {
       setMaxTableSize(mts);
     })()
   },[])
-  
+
   return (
     <>
       <main className={styles.bookingPageMain}>
