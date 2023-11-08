@@ -19,6 +19,10 @@ Throughout the project's development, the supplied API was not functioning prope
 ## How to start the application
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+After downloading / cloning the repository, you have to install the dependencies by running
+```
+npm install
+```
 
 In the project directory, you can run:
 
