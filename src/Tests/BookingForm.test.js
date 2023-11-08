@@ -4,6 +4,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
+  within,
 } from "@testing-library/react";
 import BookingForm from "../Components/BookingForm";
 import FakeReservationsApi from "../data/fakeApi";
@@ -26,7 +27,7 @@ describe("Reservation form stage 0", () => {
 
   test("Renders the BookingForm heading", () => {
     setup();
-    const headingElement = screen.getByText(/Book now/i);
+    const headingElement = screen.getByText(/make your reservation/i);
 
     expect(headingElement).toBeInTheDocument();
   });
@@ -120,9 +121,9 @@ describe("Reservation form stage 1", () => {
 
     const heading = screen.getByText(/choose time/i);
     const occasionInput = screen.getByLabelText(/occasion/i);
-    const timeInput = screen.getByLabelText(/we found available/i);
+    const timeInput = screen.getByLabelText(/time/i);
     const backButton = screen.getByText(/back/i);
-    const reservationButton = screen.getByText(/make your reservation/i);
+    const reservationButton = screen.getByText(/book now/i);
 
     const elements = [
       heading,
@@ -140,12 +141,30 @@ describe("Reservation form stage 1", () => {
   test("Form should display error on invalid time input and blur", async () => {
     await setup();
 
-    const timeInput = screen.getByLabelText(/we found available/i);
-    fireEvent.blur(timeInput)
-    const errorMessages = screen.getAllByRole('alert');
-    const reservationButton = screen.getByText(/make your reservation/i);
+    const timeInput = screen.getByLabelText(/time/i);
+    fireEvent.blur(timeInput);
+    const errorMessages = screen.getAllByRole("alert");
+    const reservationButton = screen.getByText(/book now/i);
 
     expect(reservationButton).toHaveAttribute("disabled");
-    expect( errorMessages[0]).toHaveTextContent(/You must/i);
+    expect(errorMessages[0]).toHaveTextContent(/You must/i);
+  });
+
+  test("Form should display message after successful submit", async () => {
+    // Todo fix select not triggering onChange?
+    await setup();
+    const timeInput = screen.getByLabelText(/time/i);
+
+    const reservationButton = screen.getByText(/book now/i);
+
+    within(timeInput)
+      .findAllByRole("option")
+      .then((options) => {
+        fireEvent.change(timeInput, {target: {value: options[1].value}});
+      });
+
+    expect(reservationButton).not.toHaveAttribute("disabled");
+    fireEvent.click(reservationButton);
+    await waitForElementToBeRemoved(reservationButton);
   });
 });
